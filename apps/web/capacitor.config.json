@@ -1,0 +1,20 @@
+{
+  "appId": "cl.zuvio.app",
+  "appName": "Zuvio",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#0D0F12"
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#0D0F12"
+    }
+  }
+}
+

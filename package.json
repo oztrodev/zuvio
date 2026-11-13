@@ -1,0 +1,12 @@
+{
+  "name": "zuvio-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zuvio — 100% Electric Vehicle Ride-Hailing Platform in Santiago de Chile",
+  "scripts": {
+    "dev:web": "npm run dev --prefix apps/web",
+    "build:web": "npm run build --prefix apps/web",
+    "test:api": "cargo test --manifest-path services/api/Cargo.toml"
+  }
+}
+

@@ -1,0 +1,22 @@
+# ==============================================================================
+# Zuvio - Robots.txt
+# Santiago de Chile 100% Electric Vehicle Ride-Hailing Platform
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Allow: /solicitar-viaje
+Allow: /conductores
+Allow: /flota-electrica
+Allow: /seguridad
+Allow: /santiago
+
+# Disallow private user states and internal APIs from search indexing
+Disallow: /admin
+Disallow: /api/
+Disallow: /documentos-privados/
+Disallow: /soporte/ticket/
+
+# Sitemap
+Sitemap: https://zuvio.cl/sitemap.xml
+
