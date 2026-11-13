@@ -1,0 +1,15 @@
+# Uso local:  docker compose up --build
+# API en http://localhost:4000/api/v1/health
+services:
+  api:
+    build:
+      context: ./services/api
+    ports:
+      - "4000:4000"
+    environment:
+      ENVIRONMENT: development
+      DEMO_MODE: "true"
+      CORS_ALLOWED_ORIGINS: "http://localhost:5173,http://127.0.0.1:5173"
+      # Secretos: se leen del .env local (no versionado). BREVO_API_KEY vacio => correo mock.
+      BREVO_API_KEY: "${BREVO_API_KEY:-}"
+    restart: unless-stopped

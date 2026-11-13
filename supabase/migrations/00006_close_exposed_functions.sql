@@ -17,3 +17,4 @@ GRANT USAGE ON SCHEMA private TO authenticated;
 ALTER FUNCTION public.is_admin() SET SCHEMA private;
 REVOKE EXECUTE ON FUNCTION private.is_admin() FROM PUBLIC, anon;
 GRANT EXECUTE ON FUNCTION private.is_admin() TO authenticated;
+

@@ -1,11 +1,11 @@
 use axum::{
-    http::{header, Method},
+    http::{header, HeaderValue, Method},
     routing::{get, post},
     Router,
 };
 use std::net::SocketAddr;
 use std::sync::Arc;
-use tower_http::cors::{Any, CorsLayer};
+use tower_http::cors::{AllowOrigin, CorsLayer};
 use tower_http::trace::TraceLayer;
 use tracing::info;
 use zuvio_api::{
@@ -65,8 +65,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         config: config.clone(),
     };
 
+    // CORS definido por CORS_ALLOWED_ORIGINS (lista separada por comas). "*" permite cualquier origen (solo demo).
+    let allow_origin = if config.cors_allowed_origins.iter().any(|o| o == "*") {
+        tracing::warn!("CORS abierto a cualquier origen (\"*\"). Usar solo en demo.");
+        AllowOrigin::any()
+    } else {
+        let origins: Vec<HeaderValue> = config
+            .cors_allowed_origins
+            .iter()
+            .filter_map(|o| o.parse::<HeaderValue>().ok())
+            .collect();
+        info!(allowed_origins = origins.len(), "CORS restringido a orígenes configurados.");
+        AllowOrigin::list(origins)
+    };
+
     let cors = CorsLayer::new()
-        .allow_origin(Any)
+        .allow_origin(allow_origin)
         .allow_methods([
             Method::GET,
             Method::POST,
