@@ -11,7 +11,9 @@ import {
   Vehicle,
 } from './types';
 
-const API_BASE = '/api/v1';
+// En producción define VITE_API_URL (ej. https://api.zuvio.cl). En local usa el proxy de Vite (/api).
+const API_ORIGIN = ((import.meta as unknown as { env?: Record<string, string | undefined> }).env?.VITE_API_URL ?? '').replace(/\/$/, '');
+const API_BASE = `${API_ORIGIN}/api/v1`;
 
 export class ApiClient {
   private static currentRole: Role = 'passenger';
